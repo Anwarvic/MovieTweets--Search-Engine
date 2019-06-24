@@ -10,6 +10,21 @@ from tone_analyzer import IBM_ToneAnalyzer
 
 
 def extract_info(data_filepath, movies_filepath):
+	"""
+	This function reads the test.dat file that contains our data
+	and simply extracts four pieces of information:
+	- user_id: The user's tweeter account id
+	- movie_id: The movie actual id on IMDB
+	- rating: The rating on a 10-star scale, extracted from the tweet text
+	- tweet_id: The actual tweet
+	And it reads movies.dat file and extracts the movie_name based on
+	the movie_id
+	Args:
+		data_filepath (string): the relative/absolute path of test.dat
+		movies_filepath (string): the relative/absolute path of movies.dat
+	Returns:
+		a dataframe written in a csv file
+	"""
 	# Parse movies.dat
 	d = {}
 	with open(movies_filepath, 'r', encoding='utf-8') as fin:
