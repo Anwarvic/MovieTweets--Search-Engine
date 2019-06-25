@@ -60,11 +60,23 @@ def extract_info(data_filepath, movies_filepath):
 
 
 def add_tweet_content(filepath):
+	"""
+	This function reads the csv produced from the previous function
+	extract_info() and gets the tweet ids and use the TwitterCaller()
+	class that we have just created to retireve the tweets' content
+	Args:
+		filepath (string): the relative/absolute path of the csv file
+	Returns:
+		another csv file containing the tweet text.
+	"""
 	df = pd.read_csv(filepath, encoding='utf-8')
 	obj = TwitterCaller()
 	tweet_texts = obj.get_tweets( list(df['tweet_id']) )
 	df['tweet_text'] = tweet_texts
 	df.to_csv('data/MovieTweets2.csv', index=False)
+
+
+
 
 
 
