@@ -57,3 +57,18 @@ def extract_info(data_filepath, movies_filepath):
 								 "rating": ratings,
 								 "tweet_id": tweet_ids})
 	df.to_csv('data/MovieTweets1.csv', index=False)
+
+
+def add_tweet_content(filepath):
+	df = pd.read_csv(filepath, encoding='utf-8')
+	obj = TwitterCaller()
+	tweet_texts = obj.get_tweets( list(df['tweet_id']) )
+	df['tweet_text'] = tweet_texts
+	df.to_csv('data/MovieTweets2.csv', index=False)
+
+
+
+if __name__ == "__main__":
+	# extract_info('data/test.dat', 'data/movies.dat')
+	add_tweet_content('data/MovieTweets1.csv')
+	
