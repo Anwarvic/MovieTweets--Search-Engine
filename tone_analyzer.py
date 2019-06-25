@@ -22,16 +22,24 @@ class IBM_ToneAnalyzer():
 
 
 	def __get_tone(self, tweet_text):
-		# try:
-		response = self.api.tone({'text': tweet_text},content_type='application/json')
-		result = response.get_result()
-		tones = result['document_tone']['tones']
-		output = {}
-		for tone in tones:
-			output[tone['tone_name']] = tone['score']
-		return output
-		# except:
-		# 	return json.dumps("")
+		"""
+		This function is responsible for calling IBM Watson API and predict the
+		tweet tone based on the text
+		Args:
+			tweet_text (string): the tweet text
+		Returns:
+			dictionary containing the tone polarity
+		"""
+		try:
+			response = self.api.tone({'text': tweet_text},content_type='application/json')
+			result = response.get_result()
+			tones = result['document_tone']['tones']
+			output = {}
+			for tone in tones:
+				output[tone['tone_name']] = tone['score']
+			return output
+		except:
+			return json.dumps("")
 
 
 	def get_tweets_tone(self, tweets):
