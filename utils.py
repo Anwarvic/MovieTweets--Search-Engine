@@ -1,5 +1,19 @@
-
+import time
 import yaml
+
+
+
+def get_todays_date():
+	"""
+	This is a simple function to return the date of the day
+	when this function runs. For example 29/5/2019 will be 20190529
+	It's used when POSTing to wit API
+	"""
+	obj = time.gmtime(time.time())
+	year = str(obj.tm_year).zfill(4)
+	month = str(obj.tm_mon).zfill(2)
+	day = str(obj.tm_mday).zfill(2)
+	return "{}-{}-{}".format(year, month, day)
 
 
 
