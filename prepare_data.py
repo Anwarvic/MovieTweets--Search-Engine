@@ -15,7 +15,6 @@ def extract_info(data_filepath, movies_filepath):
 	and simply extracts four pieces of information:
 	- user_id: The user's tweeter account id
 	- movie_id: The movie actual id on IMDB
-	- rating: The rating on a 10-star scale, extracted from the tweet text
 	- tweet_id: The actual tweet
 	And it reads movies.dat file and extracts the movie_name based on
 	the movie_id
@@ -36,7 +35,6 @@ def extract_info(data_filepath, movies_filepath):
 		user_ids = []
 		movie_ids = []
 		movie_names = []
-		ratings = []
 		tweet_ids = []
 		
 		for line in tqdm(fin.readlines()[1:10000], desc="Reading Data"):
@@ -44,17 +42,15 @@ def extract_info(data_filepath, movies_filepath):
 			user_ids.append(int(lst[0]))
 			movie_ids.append(int(lst[1]))
 			movie_names.append(d[int(lst[1])])
-			ratings.append(int(lst[2]))
 			# Convert the tweet data string to a JSON object
 			json_obj = json.loads(','.join(lst[4:]))
 			tweet_ids.append(json_obj['id'])
 	
 	# save the tweets
-	assert len(user_ids) == len(movie_ids) == len(ratings) == len(tweet_ids)
+	assert len(user_ids) == len(movie_ids) == len(tweet_ids)
 	df = pd.DataFrame.from_dict({"user_id": user_ids,
 								 "movie_id": movie_ids,
 								 "movie_name": movie_names,
-								 "rating": ratings,
 								 "tweet_id": tweet_ids})
 	df.to_csv('data/MovieTweets1.csv', index=False)
 
