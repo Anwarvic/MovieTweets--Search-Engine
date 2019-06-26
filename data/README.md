@@ -29,14 +29,15 @@ This script is used to obtain the data in three steps:
 - Step1: obtaining what we want from `test.dat` and `movies.dat`.
 - Step2: Getting tweets content.
 - Step3: Getting Tones for tweets.
+- Step4: Group data by movie
 
 
 
 ### Step1
 
-The function responsible for doing this step is `extract_info()`. This function uses `test.dat` to extract `tweet_id`, `movie_id`, `rating`, and `tweet_id`. And it uses `movies.dat` to extract `movie_name` for each single movie in our data. The output of this step is a csv file called `MovieTweets1.csv`.
+The function responsible for doing this step is `extract_info()`. This function uses `test.dat` to extract `user_id`, `movie_id`, and `tweet_id`. And it uses `movies.dat` to extract `movie_name` for each single movie in our data. The output of this step is a csv file called `MovieTweets1.csv`.
 
- The resulting CSV  won't contain `tweet_text` or `tweet_tone` as both will be obtained in the following two steps. Also, it won't contain the whole 20,000 tweets in the `test.dat` file, just the first 10,000. Why is that? Apparently, Twitter puts a rate limit for retrieving data from its API. When you exceed this rate, you will a warning that says `Rate limit reached. Sleeping for: 758` which means that I had to slow down my retrieving rate to the extent that I have collected the 10,000 tweets in more than 3 hours.
+ The resulting CSV from this step won't contain `tweet_text` or `tweet_tone` as both will be obtained in the following two steps. Also, it won't contain the whole 20,000 tweets in the `test.dat` file, just the first 10,000. Why is that? Apparently, Twitter puts a rate limit for retrieving data from its API. When you exceed this rate, you will a warning that says `Rate limit reached. Sleeping for: 758` which means that I had to slow down my retrieving rate to the extent that I have collected the 10,000 tweets in more than 3 hours.
 
 
 
@@ -48,6 +49,14 @@ This step is responsible for getting only the `tweet_text` using Twitter API. Th
 
 ### Step3
 
-This step is responsible for getting the tone for our tweets using IBM Tone Analyzer. The function responsible for this job is `add_tweet_tone()` which uses `ibm_tone_analyzer.py`  to communicate with the IBM API. The  resulting CSV will be called `MovieTweets.csv` which will contain just one additional column (`tweet_tone`). 
+This step is responsible for getting the tone for our tweets using IBM Tone Analyzer. The function responsible for this job is `add_tweet_tone()` which uses `tone_analyzer.py`  to communicate with the IBM API. The  resulting CSV will be called `MovieTweets.csv` which will contain just one additional column (`tweet_tone`). The tweets in this data are so generic which have no tones. So, to make things interesting, I've generated random tones to each tweet in the data
 
-This CSV is the one that we are going to index
+
+### Step4
+
+This step is simple. Here, we group the data from the last stem by `movie_id`. The resulting csv from this step is the one sent to ElasticSearch engine. This csv will containt these fileds `movie_id`, `movie_name`, `reviews_count`, `average_tones`, and `tweets`. It will look like this:
+
+
+movie_id|movie_name|reviews_count|average_tones|tweets
+|-------|---------|-------------|-------------|------|
+|993846 |The Wolf of Wall Street (2013)|535|{'Anger': 0.2844859585329844, 'Fear': 0.2838749471226159, 'Joy': 0.27755553696029167, 'Sadness': 0.26465190869767846, 'Analytical': 0.2751570982991599, 'Confident': 0.2899761642095416, 'Tentative': 0.27979233958022803}|[{'tweet_id': 4.21051e+17, 'tweet_text': 'I rated The Wolf of Wall Street 1\/10  #IMDb http:\/\/t.co\/eJtRKX4VB5'}, ...]|
