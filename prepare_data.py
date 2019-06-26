@@ -78,9 +78,22 @@ def add_tweet_content(filepath):
 
 
 
+def add_tweet_tone(filepath):
+	df = pd.read_csv(filepath)
+	# remove empty tweets
+	df.dropna(how='any', inplace=True)
+	obj = IBM_ToneAnalyzer()
+	tweet_tones = obj.get_tweets_tone( list(df['tweet_text']) )
+	# tweet_tones = [get_random_tone(random.randint(2, 5)) for _ in tqdm(list(df['tweet_text']))]
+	df['tweet_tone'] = tweet_tones
+	df.to_csv('data/MovieTweets.csv', index=False)
+
+
+
+
 
 
 if __name__ == "__main__":
 	# extract_info('data/test.dat', 'data/movies.dat')
-	add_tweet_content('data/MovieTweets1.csv')
-	
+	# add_tweet_content('data/MovieTweets1.csv')
+	add_tweet_tone('data/MovieTweets2.csv')
