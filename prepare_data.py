@@ -76,9 +76,16 @@ def add_tweet_content(filepath):
 	df.to_csv('data/MovieTweets2.csv', index=False)
 
 
-
-
 def add_tweet_tone(filepath):
+	"""
+	This function reads the csv produced from the previous function
+	add_tweet_content() and gets the tweet text and use the IBM_ToneAnalyzer()
+	class that we have just created to retireve the tweets' tone
+	Args:
+		filepath (string): the relative/absolute path of the csv file
+	Returns:
+		another csv file containing the tweet tones.
+	"""
 	df = pd.read_csv(filepath)
 	# remove empty tweets
 	df.dropna(how='any', inplace=True)
