@@ -11,7 +11,6 @@ The data used in this repo is a data that contains reviews on IMDb movies on Twi
 - `tweet_tone`: the tone of the tweet.
 
 
-
  I have prepared this data using the following steps:
 
 - Download this [MovieTwetings](https://github.com/sidooms/MovieTweetings/blob/master/recsyschallenge2014/recsys_challenge_2014_dataset.zip) data (65MB).
