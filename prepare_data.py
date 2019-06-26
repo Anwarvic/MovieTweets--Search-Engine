@@ -106,13 +106,24 @@ def add_tweet_tone(filepath):
 	df.dropna(how='any', inplace=True)
 	# obj = IBM_ToneAnalyzer()
 	# tweet_tones = obj.get_tweets_tone( list(df['tweet_text']) )
-	tweet_tones = [get_random_tone(random.randint(2, 5)) for _ in tqdm(list(df['tweet_text']))]
+	tweet_tones = [get_random_tone(random.randint(2, 5)) \
+							for _ in tqdm(list(df['tweet_text']))]
 	df['tweet_tone'] = tweet_tones
 	df.to_csv('data/MovieTweets.csv', index=False)
 
 
 
 def average_tones(lst_tones):
+	"""
+	This function takes a list of tweets' tones. Then, it averages the emotion.
+	Averaging here is tricky as we need to keep track of the count of every
+	emotion.
+	Args:
+		lst_tones (list of dict): a list of tweets' tones
+	Returns
+		dict: a dictionary containing the emotion as a key and its average
+		score as value.
+	"""
 	count_dict = {'Anger': 0, 'Fear': 0, 'Joy': 0, 'Sadness': 0,
 				  'Analytical': 0, 'Confident': 0, 'Tentative': 0}
 	output = {'Anger': 0, 'Fear': 0, 'Joy': 0, 'Sadness': 0,
@@ -128,33 +139,6 @@ def average_tones(lst_tones):
 	return output
 
 
-def group_movies(filepath):
-	df = pd.read_csv(filepath)
-	# group dataframe by movie_id
-	movie_ids = []
-	movie_names = []
-	num_reviews = []
-	tones = []
-	tweets = []
-	for t, group in tqdm(df.groupby(['movie_id', 'movie_name']), desc="Grouping Movies"):
-		movie_ids.append(t[0])
-		movie_names.append(t[1])
-		num_reviews.append(len(group))
-		tmp_tweets = [] # list of dict
-		tmp_tones = [] # list of dict
-		for idx, row in group.iterrows():
-			tmp_tweets.append({ "tweet_id": row['tweet_id'], 
-								"tweet_text": row['tweet_text']})
-			tmp_tones.append(json.loads(row['tweet_tone']))
-		tones.append(average_tones(tmp_tones))
-		tweets.append(tmp_tweets)
-	newdf = pd.DataFrame.from_dict({"movie_id": movie_ids,
-									"movie_name": movie_names,
-									"reviews_count": num_reviews,
-									"average_tones": tones,
-									"tweets": tweets})
-	newdf = newdf.sort_values(['reviews_count'], ascending=False)
-	newdf.to_csv('data/MovieTweetsIndex.csv', index=False)
 
 
 
@@ -163,5 +147,5 @@ def group_movies(filepath):
 if __name__ == "__main__":
 	# extract_info('data/test.dat', 'data/movies.dat')
 	# add_tweet_content('data/MovieTweets1.csv')
-	# add_tweet_tone('data/MovieTweets2.csv')
-	group_movies('data/MovieTweets.csv')
+	add_tweet_tone('data/MovieTweets2.csv')
+
