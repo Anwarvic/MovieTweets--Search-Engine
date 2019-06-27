@@ -136,6 +136,14 @@ def average_tones(lst_tones):
 
 
 def group_movies(filepath):
+	"""
+	This function uses the CSV file produced from add_tweet_tone() and group
+	the data by movie_id
+	Args:
+		filepath:  the relative/absolute path of the csv file
+	Returns:
+		a CSV file (final-version)
+	"""
 	df = pd.read_csv(filepath)
 	# group dataframe by movie_id
 	movie_ids = []
