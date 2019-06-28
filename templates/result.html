@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" style="color: #ffffff;">
+	<head>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="This is a simple template ">
+        <meta name="author" content="Anwarvic">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}"/>
+	</head>
+	<body">
+		<div class="container">
+	            <div class="row" style="margin-left: 30px; margin-top: 50px;">
+	                <input type="text" class="form-control" value="{{query_text}}" style="width: 800px;">
+	                <div class="pg-empty-placeholder"></div>
+	            </div>
+	        </div>
+	        {% for row in toPass %}
+		        <div class="row" style="margin-top: 50px;">
+		            <div style="margin-left: 30px;">
+		                <h3><a href="{{ url_for('chart', id_=row.movie_id) }}">{{row.movie_name}}</a></h3>
+		                <p>IMDB ID: {{row.movie_id}}</p>
+		                <p>Review Count: {{row.reviews_count}}</p>
+		                <p>Tone Analysis: {{row.tones}}</p>
+		            </div>
+		            <div class="pg-empty-placeholder"></div>
+		        </div>
+	  		{% endfor %}
+	</body>
+</html>
