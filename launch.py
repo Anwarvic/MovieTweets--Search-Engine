@@ -29,6 +29,18 @@ def elastic_query(query_text):
 	return res
 
 
+
+@app.route('/movie/<id_>')
+def chart(id_):
+	hits = es_search(ES, id_)
+	out = hits[0]['_source']
+	return render_template('dashboard.html',
+							movie_name = out['movie_name'],
+							tones=out['average_tones'],
+							tweets = out['tweets'])
+
+
+
 if __name__ == '__main__':
 	ES = Elasticsearch([{'host':'localhost','port':9200}])
 	app.run(debug = True)
