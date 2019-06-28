@@ -20,4 +20,41 @@ This repo contains a Flask application that uses ElasticSeach internally to prov
 The prerequisites of this repo is so simple:
 
 - You need to download and install ElasticSearch which can be done easily from [here]([https://www.elastic.co/downloads/elasticsearch)
-- You need to install the requirements
+- You need to install the requirements using `pip install -r requirements`.
+
+
+
+## How it Works
+
+It's so simple, ElasticSearch does all the heavy work and our application just previews the results. The first thing that we need to do is to index our data (which can be found in `utils\data\MovieTweetsIndex.csv`). This can be done by running the `index_data([data_path])` function found in the script `utils\indexing.py`  which can be used as the following:
+
+- First, run the ElasicSearch Executable
+- Then, open the command line in the repo's root directory.
+- Run the following few lines:
+
+```python
+>>> from utils.indexing import index_data
+>>> index_data()
+Indexing:   0%|██████████████████| 2060/2060 [162:27<?, 14.45it/s]
+```
+
+Now, we have indexed our data into ElasticSearch. To make sure that went as it should, let's run the following commands:
+
+- Open the terminal in the repo's root directoy.
+- Run the following commands.
+
+```python
+>>> from elasticsearch import Elasticsearch
+>>> from utils.indexing import es_search
+>>>
+>>> es = Elasticsearch([{'host':'localhost','port':9200}])
+>>> hits = es_search(es, '1130884')
+>>> hit[0]['_source']['movie_name']
+Shutter Island (2010)
+>>> hit[0]['_score']
+1.0
+```
+
+Now, everything is as expected!! 
+
+Let's run our Flask application to search our indexed data. To do that, just run `launch.py` . This will connected the server to the localhost port 5000 (which is the Flask's default). And that's it.. Enjoy!!
