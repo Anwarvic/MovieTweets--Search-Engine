@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Blank Template for Bootstrap</title>
+        <!-- Bootstrap core CSS --> 
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap/css/bootstrap.css') }}"/>
+        <!-- Custom styles for this template -->
+        <link href="style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container text-center" data-placement="bottom" style="text-align: center; margin-top: 150px;">
+            <div>
+                <h1  margin-bottom: 20px;">Movie Tweets</h1>
+                <h2  margin-bottom: 20px;">Try Below!!</h2>
+                <form method="POST">
+                    <input type="text" name='search_query' class="form-control" placeholder="Search" style="width: 800px; display: inline-block; margin-top: 20px">
+                </form>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="{{ url_for('static', filename='assets/js/jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/popper.js') }}"></script>
+        <script src="{{ url_for('static', filename='bootstrap/js/bootstrap.min.js') }}"></script>
+    </body>
+</html>
