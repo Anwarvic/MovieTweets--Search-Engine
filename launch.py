@@ -2,7 +2,7 @@ import os
 from elasticsearch import Elasticsearch
 from flask import Flask, render_template, request, redirect, url_for
 
-from indexing import es_search
+from utils.indexing import es_search
 
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return render_template("index.html") #TODO: change temp.html to index.html
+	return render_template("index.html")
 
 
 @app.route('/', methods=['POST'])
