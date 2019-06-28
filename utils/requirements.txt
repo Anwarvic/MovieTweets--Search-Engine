@@ -1,0 +1,7 @@
+pandas
+flask
+tweepy
+tqdm
+json
+ibm-watson
+pyyaml
