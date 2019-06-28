@@ -1,0 +1,13 @@
+#---! THIS FILE SHOULD BE MODIFIED BASED ON YOUR CONFIGURATIONS
+
+
+# Twitter API credentials
+twitter_access_token: #add here
+twitter_secret_token: #add here
+twitter_consumer_key: #add here
+twitter_consumer_secret: #add here
+
+
+# IBM Tone Analyzer
+ibm_api_key: #add here
+ibm_url: #add here
