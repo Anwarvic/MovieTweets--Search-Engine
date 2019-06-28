@@ -53,13 +53,13 @@ This step is responsible for getting the tone for our tweets using IBM Tone Anal
 
 ### Step4
 
-This step is simple. Here, we group the data from the last stem by `movie_id`. The resulting csv from this step is the one sent to ElasticSearch engine. This csv will containt these fileds `movie_id`, `movie_name`, `reviews_count`, `average_tones`, and `tweets`. It will look like this:
+This step is simple. Here, we group the data from the last stem by `movie_id`. The resulting csv from this step is the one sent to ElasticSearch engine. This csv will contains these fileds `movie_id`, `movie_name`, `reviews_count`, `average_tones`, and `tweets`. It will look like this:
 
 
 
-| movie_id | movie_name | reviews_count | average_tones | tweets |
-| -------- | ---------- | ------------- | ------------- | ------ |
-|          |            |               |               |        |
+| movie_id | movie_name                     | reviews_count | average_tones                            | tweets                                   |
+| -------- | ------------------------------ | ------------- | ---------------------------------------- | ---------------------------------------- |
+| 993846   | The Wolf of Wall Street (2013) | 535           | {'Anger': 0.2844859585329844, 'Fear': 0.2838749471226159, 'Joy': 0.27755553696029167, 'Sadness': 0.26465190869767846, 'Analytical': 0.2751570982991599, 'Confident': 0.2899761642095416, 'Tentative': 0.27979233958022803} | [{'tweet_id': 4.21051e+17, 'tweet_text': 'I rated The Wolf of Wall Street 1\/10  #IMDb http:\/\/t.co\/eJtRKX4VB5'}, ...] |
 
-|-------|---------|-------------|-------------|------|
-|993846 |The Wolf of Wall Street (2013)|535|{'Anger': 0.2844859585329844, 'Fear': 0.2838749471226159, 'Joy': 0.27755553696029167, 'Sadness': 0.26465190869767846, 'Analytical': 0.2751570982991599, 'Confident': 0.2899761642095416, 'Tentative': 0.27979233958022803}|[{'tweet_id': 4.21051e+17, 'tweet_text': 'I rated The Wolf of Wall Street 1\/10  #IMDb http:\/\/t.co\/eJtRKX4VB5'}, ...]|
+
+
