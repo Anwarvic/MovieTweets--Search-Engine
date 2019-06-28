@@ -80,7 +80,10 @@ def es_search(es_object, user_query):
 
 
 if __name__ == "__main__":
+	# To index the data into ElasticSearch, uncomment the following line
 	# index_data('data/MovieTweetsIndex.csv')
+
+	# To search inside indexed data, Uncomment the next three lines
 	es = Elasticsearch([{'host':'localhost','port':9200}])
 	for hit in es_search(es, '1130884'):
 		print(hit['_score'])
