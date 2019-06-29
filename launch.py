@@ -28,6 +28,7 @@ def elastic_query(query_text):
 						  toPass=query_out)
 	return res
 
+
 @app.route('/query/<query_text>', methods=['POST'])
 def result_form_post(query_text):
 	text = request.form['search_query']
@@ -42,6 +43,9 @@ def chart(id_):
 							movie_name = out['movie_name'],
 							tones=out['average_tones'],
 							tweets = out['tweets'])
+
+
+
 
 
 
