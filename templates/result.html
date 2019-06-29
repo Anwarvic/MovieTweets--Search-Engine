@@ -11,8 +11,10 @@
 	<body">
 		<div class="container">
 	            <div class="row" style="margin-left: 30px; margin-top: 50px;">
-	                <input type="text" class="form-control" value="{{query_text}}" style="width: 800px;">
-	                <div class="pg-empty-placeholder"></div>
+	            	<form method="POST" autocomplete="on">
+	                	<input type="text" name='search_query' class="form-control" value="{{query_text}}" style="width: 800px;">
+	                </form>
+	                <!-- <div class="pg-empty-placeholder"></div> -->
 	            </div>
 	        </div>
 	        {% for row in toPass %}
