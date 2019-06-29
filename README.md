@@ -1,5 +1,5 @@
 # Movie Tweets Search Engine
-This is my attempt to create a Search Engine using Elastic Search over a simple data about IMDb Movie reviews written in tweets. The data was originally made for the RecSys Challenge 2014. I have used just about 8,000 tweets collected from the `test.dat` file. For more information about how I collected the data and structured them, you can check this README. The data I used to be index inside ElasticSearch Engine can be found int the `utils\data` directory.
+This is my attempt to create a Search Engine using Elastic Search over a simple data about IMDb Movie reviews written in tweets. The data was originally made for the RecSys Challenge 2014. I have used just about 8,000 tweets collected from the `test.dat` file. For more information about how I collected the data and structured them, you can check this [README](utils/data/README.md). The data I used to be index inside ElasticSearch Engine can be found int the `utils\data` directory.
 
 This data used here looks like this:
 
